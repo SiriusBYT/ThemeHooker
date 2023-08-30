@@ -4,21 +4,17 @@ const inject = new Injector();
 const logger = Logger.plugin("ThemeHooker");
 
 export async function start(): Promise<void> {
+  console.log(`[ThemeHooker] ThemeHooker has now started.`)
 
   const html = document.documentElement;
   const body = document.body;
-  console.log(`[ThemeHooker] ThemeHooker has now started.`)
-
-  html.setAttribute("Theme-Hooker", "");
-  const CustomThemeTag = document.querySelector('[data-client-themes="true"]');
-
   var ThemeNames: string[] = [
     "mint-apple",
     "citrus-sherbert",
     "retro-raincloud",
     "hanami",
     "sunrise",
-    "candyfloss",
+    "cotton-candy", //Candyfloss
     "lofi-vibes",
     "desert-khaki",
     "sunset",
@@ -34,28 +30,45 @@ export async function start(): Promise<void> {
     "strawberry-lemonade",
     "aurora",
     "sepia",
-    "memory-lane"
+    "easter-egg" //Memory Lane
   ]
 
-  let ThemeNum: number = 0;
+  html.setAttribute("theme-hooker", "");
+  console.log(`[ThemeHooker] Added "theme-hooker" to the <html> tag.`);
+  
+  DetectTheme();
 
-  for (let ThemeNum in ThemeNames) {
-    console.log(ThemeNum);
-    console.log(ThemeNames[ThemeNum]);
-
-    CustomThemeTag.setAttribute("id", "ThemeHook");
-    let CustomThemeContent = document.getElementById("ThemeHook").textContent;
-    console.log(document.getElementById("ThemeHook").textContent);
-
-    if(CustomThemeContent.includes(ThemeNames[ThemeNum])) {
-      console.log(`[ThemeHooker] Detected Theme: "` + ThemeNames[ThemeNum] + `".`)
-      html.setAttribute("Theme-Hooker", "theme-" + ThemeNames[ThemeNum]);
-      body.setAttribute("Theme-Hooker", "theme-" + ThemeNames[ThemeNum]);
-      break
+  function DetectTheme() {
+    for (let ThemeNumber in ThemeNames) {
+      if(document.querySelector('style[data-client-themes="true"]').textContent.includes(ThemeNames[ThemeNumber])) {
+        console.log(`[ThemeHooker] Detected Theme: "` + ThemeNames[ThemeNumber] + `".`)
+        html.setAttribute("theme-hooker", "theme-" + ThemeNames[ThemeNumber]);
+        body.setAttribute("theme-hooker", "theme-" + ThemeNames[ThemeNumber]);
+        break
+      }
     }
-   
-    
   }
+
+  const TrackedMutation = document.head;
+  const MutationConfig = { attributes: true, childList: true, subtree: true };
+
+  const TrackerReaction = (mutationList, Tracking) => {
+    for (const mutation of mutationList) {
+      if (mutation.type === "childList") {
+        console.log("[ThemeHooker] Child List Modification detected, trying to detect the current theme.");
+        DetectTheme();
+      } else if (mutation.type === "attributes") {
+        console.log(`[ThemeHooker] Attribute Modification detected, trying to detect the current theme.`);
+        DetectTheme();
+      } else if (mutation.type === "subtree") {
+        console.log(`[ThemeHooker] Subtree Modification detected, trying to detect the current theme.`);
+        DetectTheme();
+      }
+    }
+  }
+
+  const Tracking = new MutationObserver(TrackerReaction);
+  Tracking.observe(TrackedMutation, MutationConfig);
 
 }
 
