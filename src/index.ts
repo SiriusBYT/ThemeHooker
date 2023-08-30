@@ -1,29 +1,31 @@
 import { Injector, Logger, webpack } from "replugged";
 
 const inject = new Injector();
-const logger = Logger.plugin("PluginTemplate");
+const logger = Logger.plugin("ThemeHooker");
 
 export async function start(): Promise<void> {
-  const typingMod = await webpack.waitForModule<{
-    startTyping: (channelId: string) => void;
-  }>(webpack.filters.byProps("startTyping"));
-  const getChannelMod = await webpack.waitForModule<{
-    getChannel: (id: string) => {
-      name: string;
-    };
-  }>(webpack.filters.byProps("getChannel"));
+  
+  const html = document.querySelector("html");
+  const body = document.querySelector("body");
+  console.log(`[ThemeHooker] ThemeHooker has now started.`)
 
-  if (typingMod && getChannelMod) {
-    inject.instead(typingMod, "startTyping", ([channel]) => {
-      const channelObj = getChannelMod.getChannel(channel);
-      logger.log(`Typing prevented! Channel: #${channelObj?.name ?? "unknown"} (${channel}).`);
-    });
+  html.setAttribute("Theme-Hooker", "");
+  const CustomThemeTag = document.querySelector('[data-client-themes="true"]');
+  CustomThemeTag.setAttribute("id", "ThemeHook");
+  let CustomThemeContent = document.getElementById("ThemeHook").textContent;
+  console.log(document.getElementById("ThemeHook").textContent);
+
+  if(CustomThemeContent.includes("sunset")) {
+    console.log(`[ThemeHooker] Detected Theme: Sunset.`)
+    html.setAttribute("Theme-Hooker", "theme-sunset");
+    body.setAttribute("Theme-Hooker", "theme-sunset");
   }
+  async function ThemeHooker() {
+  }
+
 }
 
 export function stop(): void {
   inject.uninjectAll();
 }
 
-const html = document.querySelector("html");
-html.setAttribute("class", html.getAttribute("class") + ' themehooker-present');
