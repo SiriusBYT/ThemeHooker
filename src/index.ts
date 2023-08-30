@@ -1,65 +1,31 @@
-import { Injector, Logger, webpack } from "replugged";
-
+import { Injector, Logger, types, webpack } from "replugged";
+import { Store } from "replugged/dist/renderer/modules/common/flux";
 const inject = new Injector();
 const logger = Logger.plugin("ThemeHooker");
-
-export async function start(): Promise<void> {
-
+const CustomThemeBodyUpdater = webpack.getBySource<Record<string, types.AnyFunction>>("data-client-themes");
+const ClientThemesBackgroundStore = webpack.getByStoreName<{gradientPreset?: {id: number;}} & Store>("ClientThemesBackgroundStore");
+const ThemeNames = webpack.getByProps<Record<string, string>>("MIDNIGHT_BLURPLE","DESERT_KHAKI",);
+export function start(): void {
+  logger.log(`ThemeHooker has now started.`);
   const html = document.documentElement;
-  const body = document.body;
-  console.log(`[ThemeHooker] ThemeHooker has now started.`)
-
-  html.setAttribute("Theme-Hooker", "");
-  const CustomThemeTag = document.querySelector('[data-client-themes="true"]');
-
-  var ThemeNames: string[] = [
-    "mint-apple",
-    "citrus-sherbert",
-    "retro-raincloud",
-    "hanami",
-    "sunrise",
-    "candyfloss",
-    "lofi-vibes",
-    "desert-khaki",
-    "sunset",
-    "chroma-glow",
-    "forest",
-    "crimson-moon",
-    "midnight-burple",
-    "mars",
-    "dusk",
-    "under-the-sea",
-    "retro-storm",
-    "neon-lights",
-    "strawberry-lemonade",
-    "aurora",
-    "sepia",
-    "memory-lane"
-  ]
-
-  let ThemeNum: number = 0;
-
-  for (let ThemeNum in ThemeNames) {
-    console.log(ThemeNum);
-    console.log(ThemeNames[ThemeNum]);
-
-    CustomThemeTag.setAttribute("id", "ThemeHook");
-    let CustomThemeContent = document.getElementById("ThemeHook").textContent;
-    console.log(document.getElementById("ThemeHook").textContent);
-
-    if(CustomThemeContent.includes(ThemeNames[ThemeNum])) {
-      console.log(`[ThemeHooker] Detected Theme: "` + ThemeNames[ThemeNum] + `".`)
-      html.setAttribute("Theme-Hooker", "theme-" + ThemeNames[ThemeNum]);
-      body.setAttribute("Theme-Hooker", "theme-" + ThemeNames[ThemeNum]);
-      break
-    }
-   
-    
+  const {body} = document;
+  const fnKey = webpack.getFunctionKeyBySource(CustomThemeBodyUpdater, "clientThemesCSS")
+  inject.after(CustomThemeBodyUpdater!, fnKey!, (_args, res: {
+    clientThemesCSS: string;
+    clientThemesClassName: string;
+  }) => {
+  if (res.clientThemesCSS && res.clientThemesClassName && ClientThemesBackgroundStore!.gradientPreset && ThemeNames![ClientThemesBackgroundStore!.gradientPreset.id]) {
+    html.setAttribute("theme-hooker", `theme-${ThemeNames![ClientThemesBackgroundStore!.gradientPreset.id].toLowerCase().replaceAll("_", "-")}`);
+    body.setAttribute("theme-hooker", `theme-${ThemeNames![ClientThemesBackgroundStore!.gradientPreset.id].toLowerCase().replaceAll("_", "-")}`);
+    return res;
   }
-
+  html.setAttribute("theme-hooker", "");
+  return res;
+  });
 }
 
 export function stop(): void {
+  logger.log(`ThemeHooker has now stopped.`);
   inject.uninjectAll();
 }
 
