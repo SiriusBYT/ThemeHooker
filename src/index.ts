@@ -7,8 +7,8 @@ export async function start(): Promise<void> {
   console.log(`[ThemeHooker] ThemeHooker has now started.`)
 
   const html = document.documentElement;
-  const body = document.body;
-  var ThemeNames: string[] = [
+  const {body} = document;
+  let ThemeNames: string[] = [
     "mint-apple",
     "citrus-sherbert",
     "retro-raincloud",
@@ -35,16 +35,15 @@ export async function start(): Promise<void> {
 
   html.setAttribute("theme-hooker", "");
   console.log(`[ThemeHooker] Added "theme-hooker" to the <html> tag.`);
-  
-  DetectTheme();
 
-  function DetectTheme() {
+  detectTheme();
+
+  function detectTheme() {
     for (let ThemeNumber in ThemeNames) {
       if(document.querySelector('style[data-client-themes="true"]').textContent.includes(ThemeNames[ThemeNumber])) {
-        console.log(`[ThemeHooker] Detected Theme: "` + ThemeNames[ThemeNumber] + `".`)
-        html.setAttribute("theme-hooker", "theme-" + ThemeNames[ThemeNumber]);
-        body.setAttribute("theme-hooker", "theme-" + ThemeNames[ThemeNumber]);
-        break
+        console.log(`[ThemeHooker] Detected Theme: "${  ThemeNames[ThemeNumber]  }".`)
+        html.setAttribute("theme-hooker", `theme-${  ThemeNames[ThemeNumber]}`);
+        body.setAttribute("theme-hooker", `theme-${  ThemeNames[ThemeNumber]}`);
       }
     }
   }
@@ -56,13 +55,13 @@ export async function start(): Promise<void> {
     for (const mutation of mutationList) {
       if (mutation.type === "childList") {
         console.log("[ThemeHooker] Child List Modification detected, trying to detect the current theme.");
-        DetectTheme();
+        detectTheme();
       } else if (mutation.type === "attributes") {
         console.log(`[ThemeHooker] Attribute Modification detected, trying to detect the current theme.`);
-        DetectTheme();
+        detectTheme();
       } else if (mutation.type === "subtree") {
         console.log(`[ThemeHooker] Subtree Modification detected, trying to detect the current theme.`);
-        DetectTheme();
+        detectTheme();
       }
     }
   }
