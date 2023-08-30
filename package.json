@@ -10,7 +10,7 @@
     "build": "replugged build plugin",
     "watch": "replugged build plugin --watch",
     "bundle": "replugged bundle plugin",
-    "release": "replugged release",
+    "release": "replugged release"
   },
   "keywords": [],
   "author": "",
