@@ -33,17 +33,24 @@ export async function start(): Promise<void> {
     "easter-egg" //Memory Lane
   ]
 
-  html.setAttribute("theme-hooker", "");
+  html.setAttribute("theme-hooker", "theme-null");
   console.log(`[ThemeHooker] Added "theme-hooker" to the <html> tag.`);
 
   detectTheme();
 
   function detectTheme() {
     for (let ThemeNumber in ThemeNames) {
-      if(document.querySelector('style[data-client-themes="true"]').textContent.includes(ThemeNames[ThemeNumber])) {
-        console.log(`[ThemeHooker] Detected Theme: "${  ThemeNames[ThemeNumber]  }".`)
-        html.setAttribute("theme-hooker", `theme-${  ThemeNames[ThemeNumber]}`);
-        body.setAttribute("theme-hooker", `theme-${  ThemeNames[ThemeNumber]}`);
+      try {
+        if(document.querySelector('style[data-client-themes="true"]').textContent.includes(ThemeNames[ThemeNumber])) {
+          console.log(`[ThemeHooker] Detected Theme: "${  ThemeNames[ThemeNumber]  }".`)
+          html.setAttribute("theme-hooker", `theme-${  ThemeNames[ThemeNumber]}`);
+          body.setAttribute("theme-hooker", `theme-${  ThemeNames[ThemeNumber]}`);
+          break
+        }
+      }
+      catch {
+        html.setAttribute("theme-hooker", `theme-null`);
+        body.setAttribute("theme-hooker", `theme-null`);
       }
     }
   }
