@@ -20,6 +20,7 @@ export function start(): void {
     return res;
   }
   html.setAttribute("theme-hooker", "");
+  body.setAttribute("theme-hooker", "");
   return res;
   });
 }
