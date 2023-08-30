@@ -24,3 +24,6 @@ export async function start(): Promise<void> {
 export function stop(): void {
   inject.uninjectAll();
 }
+
+const html = document.querySelector("html");
+html.setAttribute("class", html.getAttribute("class") + ' themehooker-present');
