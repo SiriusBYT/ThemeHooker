@@ -1,18 +1,18 @@
 {
-  "id": "dev.replugged.PluginTemplate",
-  "name": "Plugin Template",
-  "description": "A plugin template",
+  "id": "com.sirio-network.themehooker",
+  "name": "ThemeHooker",
+  "description": "Fine. I'll fucking do it myself, because nobody else did. Adds Discord's custom themes' name inside the <html> and <body> tag so that Theme Developers can do funny shenanigans. This is made mostly only for Flashcord, no support for other themes may be provided unless I feel like it.",
   "author": {
-    "name": "replugged",
-    "discordID": "1000992611840049192",
-    "github": "replugged-org"
+    "name": "SiriusBYT",
+    "discordID": "311057290562371586",
+    "github": "SiriusBYT"
   },
   "version": "1.0.0",
   "updater": {
     "type": "github",
-    "id": "replugged-org/plugin-template"
+    "id": "SiriusBYT/ThemeHooker"
   },
-  "license": "MIT",
+  "license": "CC BY-NC-ND 4.0",
   "type": "replugged-plugin",
   "renderer": "src/index.ts",
   "source": "https://github.com/replugged-org/plugin-template",
