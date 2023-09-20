@@ -1,6 +1,5 @@
-import { Injector, Logger, webpack } from "replugged";
+import { Logger } from "replugged";
 
-const inject = new Injector();
 const logger = Logger.plugin("ThemeHooker");
 
 const ThemeNames: string[] = [
@@ -47,7 +46,7 @@ function setTheme() {
   }
 }
 
-export async function start(): Promise<void> {
+export function start(): void {
   logger.log(`ThemeHooker has now started.`)
 
   const html = document.documentElement;
@@ -60,7 +59,7 @@ export async function start(): Promise<void> {
 
   const MutationConfig = { attributes: true, childList: true, subtree: true };
 
-  const Tracking = new MutationObserver((mutationList, Tracking) => {
+  const Tracking = new MutationObserver((mutationList) => {
     for (const mutation of mutationList) {
       if (mutation.type === "childList") {
         logger.log("Child List Modification detected, trying to detect the current theme.");
@@ -77,9 +76,5 @@ export async function start(): Promise<void> {
 
   Tracking.observe(document.head, MutationConfig);
 
-}
-
-export function stop(): void {
-  inject.uninjectAll();
 }
 
