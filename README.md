@@ -1,4 +1,6 @@
-# This does nothing right now.
-Be patient. I hate javascript/typescript.
+![](https://sirio-network.com/flashcord/store/themehooker/store-banner.png)
+[<img src="https://sirio-network.com/flashcord/ressources/store/embed.png" width="512">](https://sirio-network.com/flashcord/store/themehooker)
 
-It will take a very long time before I finally understand what I'm doing and that this works, if it ever will.
+
+Fine. I'll fucking do it myself. Adds Discord's custom themes' name inside the <html> and <body> tag so that Theme Developers can do funny shenanigans. This is made mostly only for Flashcord, no support for other themes may be provided unless I feel like it. 
+
