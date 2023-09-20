@@ -4,7 +4,7 @@ const inject = new Injector();
 const logger = Logger.plugin("ThemeHooker");
 
 export async function start(): Promise<void> {
-  console.log(`[ThemeHooker] ThemeHooker has now started.`)
+  logger.log(`ThemeHooker has now started.`)
 
   const html = document.documentElement;
   const {body} = document;
@@ -34,7 +34,7 @@ export async function start(): Promise<void> {
   ]
 
   html.setAttribute("theme-hooker", "theme-null");
-  console.log(`[ThemeHooker] Added "theme-hooker" to the <html> tag.`);
+  logger.log(`Added "theme-hooker" to the <html> tag.`);
 
   detectTheme();
 
@@ -42,7 +42,7 @@ export async function start(): Promise<void> {
     for (let ThemeNumber in ThemeNames) {
       try {
         if(document.querySelector('style[data-client-themes="true"]').textContent.includes(ThemeNames[ThemeNumber])) {
-          console.log(`[ThemeHooker] Detected Theme: "${  ThemeNames[ThemeNumber]  }".`)
+          logger.log(`Detected Theme: "${  ThemeNames[ThemeNumber]  }".`)
           html.setAttribute("theme-hooker", `theme-${  ThemeNames[ThemeNumber]}`);
           body.setAttribute("theme-hooker", `theme-${  ThemeNames[ThemeNumber]}`);
           break
@@ -61,13 +61,13 @@ export async function start(): Promise<void> {
   const TrackerReaction = (mutationList, Tracking) => {
     for (const mutation of mutationList) {
       if (mutation.type === "childList") {
-        console.log("[ThemeHooker] Child List Modification detected, trying to detect the current theme.");
+        logger.log("Child List Modification detected, trying to detect the current theme.");
         detectTheme();
       } else if (mutation.type === "attributes") {
-        console.log(`[ThemeHooker] Attribute Modification detected, trying to detect the current theme.`);
+        logger.log(`Attribute Modification detected, trying to detect the current theme.`);
         detectTheme();
       } else if (mutation.type === "subtree") {
-        console.log(`[ThemeHooker] Subtree Modification detected, trying to detect the current theme.`);
+        logger.log(`Subtree Modification detected, trying to detect the current theme.`);
         detectTheme();
       }
     }
