@@ -24,22 +24,23 @@ const ThemeNames: string[] = [
   "strawberry-lemonade",
   "aurora",
   "sepia",
-  "easter-egg" //Memory Lane
-]
+  "easter-egg", //Memory Lane
+];
 
 function setTheme(): void {
-  const {body, documentElement: html} = document
+  const { body, documentElement: html } = document;
 
   for (const Theme of ThemeNames) {
     try {
-      if(document.querySelector?.('style[data-client-themes="true"]')?.textContent?.includes?.(Theme)) {
-        logger.log(`Detected Theme: "${Theme}".`)
+      if (
+        document.querySelector?.('style[data-client-themes="true"]')?.textContent?.includes?.(Theme)
+      ) {
+        logger.log(`Detected Theme: "${Theme}".`);
         html.setAttribute("theme-hooker", `theme-${Theme}`);
         body.setAttribute("theme-hooker", `theme-${Theme}`);
-        break
+        break;
       }
-    }
-    catch {
+    } catch {
       html.setAttribute("theme-hooker", `theme-null`);
       body.setAttribute("theme-hooker", `theme-null`);
     }
@@ -47,7 +48,7 @@ function setTheme(): void {
 }
 
 export function start(): void {
-  logger.log(`ThemeHooker has now started.`)
+  logger.log(`ThemeHooker has now started.`);
 
   const html = document.documentElement;
 
@@ -55,7 +56,6 @@ export function start(): void {
   logger.log(`Added "theme-hooker" to the <html> tag.`);
 
   setTheme();
-
 
   const MutationConfig = { attributes: true, childList: true, subtree: true };
 
@@ -76,6 +76,4 @@ export function start(): void {
   });
 
   Tracking.observe(document.head, MutationConfig);
-
 }
-
