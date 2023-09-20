@@ -27,12 +27,12 @@ const ThemeNames: string[] = [
   "easter-egg" //Memory Lane
 ]
 
-function setTheme() {
+function setTheme(): void {
   const {body, documentElement: html} = document
 
   for (const Theme of ThemeNames) {
     try {
-      if(document.querySelector('style[data-client-themes="true"]').textContent.includes(Theme)) {
+      if(document.querySelector?.('style[data-client-themes="true"]')?.textContent?.includes?.(Theme)) {
         logger.log(`Detected Theme: "${Theme}".`)
         html.setAttribute("theme-hooker", `theme-${Theme}`);
         body.setAttribute("theme-hooker", `theme-${Theme}`);
@@ -67,6 +67,7 @@ export function start(): void {
       } else if (mutation.type === "attributes") {
         logger.log(`Attribute Modification detected, trying to detect the current theme.`);
         setTheme();
+        // @ts-expect-error Probably included for a reason?
       } else if (mutation.type === "subtree") {
         logger.log(`Subtree Modification detected, trying to detect the current theme.`);
         setTheme();
