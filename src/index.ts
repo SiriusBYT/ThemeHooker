@@ -58,10 +58,9 @@ export async function start(): Promise<void> {
   setTheme();
 
 
-  const TrackedMutation = document.head;
   const MutationConfig = { attributes: true, childList: true, subtree: true };
 
-  const TrackerReaction = (mutationList, Tracking) => {
+  const Tracking = new MutationObserver((mutationList, Tracking) => {
     for (const mutation of mutationList) {
       if (mutation.type === "childList") {
         logger.log("Child List Modification detected, trying to detect the current theme.");
@@ -74,10 +73,9 @@ export async function start(): Promise<void> {
         setTheme();
       }
     }
-  }
+  });
 
-  const Tracking = new MutationObserver(TrackerReaction);
-  Tracking.observe(TrackedMutation, MutationConfig);
+  Tracking.observe(document.head, MutationConfig);
 
 }
 
