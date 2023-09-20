@@ -39,12 +39,12 @@ export async function start(): Promise<void> {
   detectTheme();
 
   function detectTheme() {
-    for (let ThemeNumber in ThemeNames) {
+    for (const Theme of ThemeNames) {
       try {
-        if(document.querySelector('style[data-client-themes="true"]').textContent.includes(ThemeNames[ThemeNumber])) {
-          logger.log(`Detected Theme: "${  ThemeNames[ThemeNumber]  }".`)
-          html.setAttribute("theme-hooker", `theme-${  ThemeNames[ThemeNumber]}`);
-          body.setAttribute("theme-hooker", `theme-${  ThemeNames[ThemeNumber]}`);
+        if(document.querySelector('style[data-client-themes="true"]').textContent.includes(Theme)) {
+          logger.log(`Detected Theme: "${Theme}".`)
+          html.setAttribute("theme-hooker", `theme-${Theme}`);
+          body.setAttribute("theme-hooker", `theme-${Theme}`);
           break
         }
       }
