@@ -1,4 +1,4 @@
-![](https://sirio-network.com/flashcord/store/themehooker/store-banner.png)
+![](https://sirio-network.com/flashcord/store/themehooker/store-banner.png#)
 
 <p align="right">
   <a href="https://sirio-network.com/flashcord/store/themehooker">
