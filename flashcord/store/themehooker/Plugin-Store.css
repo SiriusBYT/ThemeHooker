@@ -3,6 +3,7 @@ body {
     background-image: url(https://sirio-network.com/sbin/default-bgr.jpg) !important;
     background-size: 100vw;
     background-position-x: 0vw;
+    background-repeat: repeat-x;
     animation: SNDL-Default_BGR 2s linear infinite;
 }
 
