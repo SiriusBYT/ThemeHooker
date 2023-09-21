@@ -1,9 +1,9 @@
 body {
     background-color: #ffffff;
     background-image: url(https://sirio-network.com/sbin/default-bgr.jpg) !important;
-    background-size: 100vw !important;
+    background-size: 100vw;
     background-position-x: 0vw;
-    animation: SNDL-Default_BGR 2s linear infinite !important;
+    animation: SNDL-Default_BGR 2s linear infinite;
 }
 
 @keyframes SNDL-Default_BGR {
