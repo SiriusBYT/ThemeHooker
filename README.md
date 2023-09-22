@@ -1,7 +1,7 @@
 ![](https://sirio-network.com/flashcord/store/themehooker/store-banner.png#)
 
 <p align="right">
-  <a href="https://sirio-network.com/flashcord/store/themehooker">
+  <a href="https://sirio-network.com/flashcord/store/themehooker.html">
     <img align="center" src="https://sirio-network.com/flashcord/ressources/store/small-embed.png" width="386">
   </a>
 </p>
