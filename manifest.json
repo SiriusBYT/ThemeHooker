@@ -7,7 +7,7 @@
     "discordID": "311057290562371586",
     "github": "SiriusBYT"
   },
-  "version": "1.0.2",
+  "version": "1.1.0",
   "updater": {
     "type": "github",
     "id": "SiriusBYT/ThemeHooker"
@@ -15,6 +15,6 @@
   "license": "CC BY-NC-ND 4.0",
   "type": "replugged-plugin",
   "renderer": "src/index.ts",
-  "source": "https://github.com/replugged-org/plugin-template",
+  "source": "https://github.com/SiriusBYT/ThemeHooker",
   "image": ["https://i.imgur.com/14CNs3a.png?CHANGE-THIS-URL"]
 }
