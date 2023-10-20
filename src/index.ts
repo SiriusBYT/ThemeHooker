@@ -19,8 +19,8 @@ export function start(): void {
     body.setAttribute("theme-hooker", `theme-${ThemeNames![ClientThemesBackgroundStore!.gradientPreset.id].toLowerCase().replaceAll("_", "-")}`);
     return res;
   }
-  html.setAttribute("theme-hooker", "");
-  body.setAttribute("theme-hooker", "");
+  html.setAttribute("theme-hooker", "theme-null");
+  body.setAttribute("theme-hooker", "theme-null");
   return res;
   });
 }
