@@ -7,18 +7,12 @@ const CustomThemeBodyUpdater =
 const ClientThemesBackgroundStore = webpack.getByStoreName<
   { gradientPreset?: { id: number } } & Store
 >("ClientThemesBackgroundStore");
-const ThemeNames = webpack.getByProps<Record<string, string>>(
-  "MIDNIGHT_BLURPLE",
-  "DESERT_KHAKI",
-);
+const ThemeNames = webpack.getByProps<Record<string, string>>("MIDNIGHT_BLURPLE", "DESERT_KHAKI");
 export function start(): void {
   logger.log(`ThemeHooker has now started.`);
   const html = document.documentElement;
   const { body } = document;
-  const fnKey = webpack.getFunctionKeyBySource(
-    CustomThemeBodyUpdater,
-    "clientThemesCSS",
-  );
+  const fnKey = webpack.getFunctionKeyBySource(CustomThemeBodyUpdater, "clientThemesCSS");
   inject.after(
     CustomThemeBodyUpdater!,
     fnKey!,
