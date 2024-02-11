@@ -1,0 +1,20 @@
+{
+    "name": "ThemeHooker",
+    "long_description": "                <p>Fine. I'll fucking do it myself. Adds Discord's custom themes' name inside the html and body tag so that Theme Developers can do funny shenanigans.\n                    This is made mostly only for Flashcord, no support for other themes may be provided unless I feel like it. </p>\n                <p>This plugins add a new attribute to the html and body tag named 'theme-hooker'.</p>\n                <p>When no custom nitro themes are detected, the attribute's default value is 'theme-null'.</p>\n                <p>When ThemeHooker detects a theme, it simply adds 'theme-[name of nitro theme]'.</p>\n                <p>Please note that the Candyfloss theme is actually named 'theme-cotton-candy' and the Memory Lane theme is actually named 'theme-easter-egg'.</p>",
+    "short_description": "This store page was created using the Flashcord Store Quick Config Python Script!",
+    "version": "v1.1.0",
+    "author": "SiriusBYT",
+    "contributors": "Catalyst4222, Tharki-God",
+    "github_repo": "https://github.com/SiriusBYT/ThemeHooker",
+    "img_store": "store-banner.png",
+    "img_embed": "embed-banner.png",
+    "license": "CC-BY-ND-NC 4.0",
+    "license_year": "2023-2024",
+    "is_rpplugin": true,
+    "is_rptheme": false,
+    "images_are_full_links": false,
+    "internal_name": "themehooker",
+    "discord_link": "https://sirio-network.com/redirect/discord",
+    "sndl_theme": "Light",
+    "embed_color": "#FF69FF"
+}
