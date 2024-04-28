@@ -16,5 +16,24 @@
   "type": "replugged-plugin",
   "renderer": "src/index.ts",
   "source": "https://github.com/SiriusBYT/ThemeHooker",
-  "image": ["https://i.imgur.com/14CNs3a.png?CHANGE-THIS-URL"]
+  "image": ["https://sirio-network.com/flashcord/store/plugins/siriusbyt/themehooker-files/embed-banner.png"],
+  "flashcord": {
+    "general_information": {
+        "contributors": "Catalyst4222, Nanakusa",
+        "discord_link": "https://sirio-network.com/redirect/discord",
+        "license_year": "2023-2024",
+        "sndl_theme": "Light",
+        "embed_color": "#FF69FF",
+        "tags": [
+            "Theming Dependency",
+            "Companion Plugin"
+        ]
+    },
+    "internal_structure": {
+        "internal_name": "themehooker",
+        "image_store": "store-banner.png",
+        "image_embed": "embed-banner.png",
+        "backup_files": false
+    }
+  }
 }
